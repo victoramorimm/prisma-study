@@ -1,0 +1,10 @@
+{
+  "mixers": [
+      {
+        "input": [
+          "base.prisma",
+          "./src/modules/users/models/User.prisma"
+        ]
+      }
+  ]
+}
