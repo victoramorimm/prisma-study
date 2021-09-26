@@ -14,6 +14,16 @@ class CreateUser {
 
       const prisma = new PrismaClient();
 
+      const isEmailAlreadyInUse = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+
+      if (isEmailAlreadyInUse) {
+        throw new Error("The e-mail is already in use");
+      }
+
       const user = await prisma.user.create({
         data: {
           name,
