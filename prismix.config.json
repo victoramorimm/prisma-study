@@ -3,7 +3,8 @@
       {
         "input": [
           "base.prisma",
-          "./src/modules/users/models/User.prisma"
+          "./src/modules/users/models/User.prisma",
+          "./src/modules/students/models/Student.prisma"
         ]
       }
   ]
