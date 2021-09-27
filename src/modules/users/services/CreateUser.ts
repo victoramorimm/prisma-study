@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from ".prisma/client";
+import IUsersRepository from "../repositories/IUsersRepository";
 
 interface ICreateUserDTO {
   name: string;
@@ -6,6 +7,7 @@ interface ICreateUserDTO {
 }
 
 class CreateUser {
+  constructor(private usersRepository: IUsersRepository) {}
   async run({ name, email }: ICreateUserDTO) {
     try {
       if (!name || !email) {
@@ -24,11 +26,9 @@ class CreateUser {
         throw new Error("The e-mail is already in use");
       }
 
-      const user = await prisma.user.create({
-        data: {
-          name,
-          email,
-        },
+      const user = await this.usersRepository.create({
+        name,
+        email,
       });
 
       return user;
