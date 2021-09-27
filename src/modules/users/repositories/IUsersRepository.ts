@@ -11,6 +11,7 @@ export interface ICreateUsers {
 
 interface IUsersRepository {
   create({ name, email }: ICreateUsers): Promise<User>;
+  findByEmail(email: string): Promise<User | null>;
 }
 
 export default IUsersRepository;
