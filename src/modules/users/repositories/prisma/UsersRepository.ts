@@ -1,6 +1,10 @@
 import { Prisma, PrismaClient } from ".prisma/client";
 import prisma from "../../../../../client";
-import IUsersRepository, { ICreateUsers, User } from "../IUsersRepository";
+import IUsersRepository, {
+  ICreateUsers,
+  IDataToUpdate,
+  User,
+} from "../IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
   repository: Prisma.UserDelegate<any>;
@@ -30,6 +34,20 @@ class UsersRepository implements IUsersRepository {
     if (!user) return null;
 
     return user;
+  }
+
+  async update({ name, email, userId }: IDataToUpdate): Promise<User> {
+    const updatedUser = await this.repository.update({
+      data: {
+        name,
+        email,
+      },
+      where: {
+        id: userId,
+      },
+    });
+
+    return updatedUser;
   }
 }
 
