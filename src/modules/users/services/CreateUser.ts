@@ -14,13 +14,7 @@ class CreateUser {
         throw new Error("Required param was not provided");
       }
 
-      const prisma = new PrismaClient();
-
-      const isEmailAlreadyInUse = await prisma.user.findUnique({
-        where: {
-          email,
-        },
-      });
+      const isEmailAlreadyInUse = await this.usersRepository.findByEmail(email);
 
       if (isEmailAlreadyInUse) {
         throw new Error("The e-mail is already in use");
