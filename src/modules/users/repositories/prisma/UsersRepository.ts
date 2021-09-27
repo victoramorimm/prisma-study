@@ -1,12 +1,11 @@
 import { Prisma, PrismaClient } from ".prisma/client";
+import prisma from "../../../../../client";
 import IUsersRepository, { ICreateUsers, User } from "../IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
   repository: Prisma.UserDelegate<any>;
 
   constructor() {
-    const prisma = new PrismaClient();
-
     this.repository = prisma.user;
   }
 
